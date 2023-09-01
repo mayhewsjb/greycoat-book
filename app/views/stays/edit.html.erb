@@ -1,38 +1,48 @@
-<h2>Edit Stay</h2>
-
-<%= form_for @stay do |f| %>
-  <%= f.label :start_date %>:
-  <%= f.date_select :start_date %><br>
-
-  <%= f.label :end_date %>:
-  <%= f.date_select :end_date %><br>
-
-  <%= f.label :room %>:
-  <%= f.select :room_id, Room.all.map { |r| [r.name, r.id] } + [['Other', 'other']] %><br>
-
-  <div id="other-room" style="display: none;">
-    <%= f.label :other_room_name, "Specify Room" %>
-    <%= f.text_field :other_room_name %>
+<% if @stay.errors.any? %>
+  <div class="alert alert-danger">
+    <ul>
+      <% @stay.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
   </div>
-
-  <%= f.label :description, "Description" %><br>
-  <%= f.text_area :description, rows: 5 %><br><br>
-
-  <%= f.submit "Update Booking" %>
-  <%= button_to 'Delete', stay_path(@stay), method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const roomSelect = document.querySelector("[name='stay[room_id]']");
-    const otherRoomDiv = document.getElementById("other-room");
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="mb-4">Edit Stay</h2>
 
-    roomSelect.addEventListener("change", function() {
-      if (this.value === "other") {
-        otherRoomDiv.style.display = "block";
-      } else {
-        otherRoomDiv.style.display = "none";
-      }
-    });
-  });
-</script>
+      <%= form_for @stay, html: { class: 'needs-validation', novalidate: '' } do |f| %>
+
+        <div class="form-group">
+          <%= f.label :start_date, class: 'form-label' %>
+          <%= f.date_field :start_date, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :end_date, class: 'form-label' %>
+          <%= f.date_field :end_date, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :room, class: 'form-label' %>
+          <%= f.select :room_id, Room.all.map { |r| [r.name, r.id] }, {}, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :description, "Description:", class: 'form-label' %>
+          <%= f.text_area :description, rows: 5, class: 'form-control' %>
+        </div>
+
+          <div class="form-group mt-4 d-flex">
+            <%= f.submit "Update Booking", class: 'btn btn-primary me-2' %>
+            <%= link_to 'Cancel', :back, class: 'btn btn-secondary me-2' %>
+            <%= button_to 'Delete', stay_path(@stay), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger', form: { class: 'd-inline' } %>
+          </div>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>

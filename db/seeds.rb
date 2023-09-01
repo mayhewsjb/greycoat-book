@@ -5,6 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-['Large Double', 'Small Double', 'Single Room', 'Sitting Room'].each do |room_name|
+Room.destroy_all
+
+['Large Double', 'Small Double', 'Single Room', 'Sitting Room', 'Other'].each do |room_name|
   Room.create!(name: room_name)
 end

@@ -2,10 +2,16 @@ class Stay < ApplicationRecord
   belongs_to :user
   belongs_to :room
   validates :start_date, :end_date, presence: true
-  validates :other_room_name, presence: true, if: :other_room_selected?
 
-  def other_room_selected?
-    # Adjust this logic based on how you identify the "Other" option
-    room_id == 'Other'
+  validate :end_date_after_start_date
+
+  private
+
+  def end_date_after_start_date
+    return if end_date.blank? || start_date.blank?
+
+    if end_date <= start_date
+      errors.add(:end_date, "must be after the start date")
+    end
   end
 end

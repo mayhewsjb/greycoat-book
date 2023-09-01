@@ -1,26 +1,30 @@
-<h2>All Stays</h2>
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>All Stays</h2>
+    <%= link_to 'New Stay', new_stay_path, class: 'btn btn-primary' %>
+  </div>
 
-<%= link_to 'New Stay', new_stay_path %>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Start Date</th>
-      <th>End Date</th>
-      <th>Room</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @stays.each do |stay| %>
+  <table class="table table-striped">
+    <thead class="thead-dark">
       <tr>
-        <td><%= stay.user.first_name %> <%= stay.user.last_name %></td>
-        <td><%= stay.start_date %></td>
-        <td><%= stay.end_date %></td>
-        <td><%= stay.room.name %></td>
-        <td><%= link_to 'View Details', stay_path(stay) %></td>
+        <th>User</th>
+        <th>Dates</th>
+        <th>Room</th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @stays.each do |stay| %>
+        <tr>
+          <td><%= stay.user.first_name %> <%= stay.user.last_name %></td>
+          <td><%= stay.start_date.strftime('%-m/%-d/%y') %> - <%= stay.end_date.strftime('%-m/%-d/%y') %></td>
+          <td><%= stay.room.name %></td>
+          <td>
+            <%= link_to 'View Details', stay_path(stay), class: 'btn btn-sm btn-primary' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>

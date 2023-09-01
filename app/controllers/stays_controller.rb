@@ -2,7 +2,7 @@ class StaysController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @stays = Stay.all
+    @stays = Stay.where('end_date > ?', DateTime.now)
   end
 
   def new
@@ -12,12 +12,7 @@ class StaysController < ApplicationController
   def create
     @stay = Stay.new(stay_params)
     @stay.user = current_user
-    # If the "Other" option is selected, and the `other_room_name` is filled out:
-    if params[:room_id] == "Other" && @stay.other_room_name.present?
-      # Do something special, like creating a new room, or whatever you intend
-      room = Room.create!(name: @stay.other_room_name)
-      @stay.room = room
-    end
+
     if @stay.save
       redirect_to stays_path, notice: 'Stay was successfully created.'
     else
@@ -52,6 +47,6 @@ class StaysController < ApplicationController
   private
 
   def stay_params
-    params.require(:stay).permit(:start_date, :end_date, :room_id, :other_room_name)
+    params.require(:stay).permit(:start_date, :end_date, :room_id, :description)
   end
 end
