@@ -1,0 +1,38 @@
+<h2>Edit Stay</h2>
+
+<%= form_for @stay do |f| %>
+  <%= f.label :start_date %>:
+  <%= f.date_select :start_date %><br>
+
+  <%= f.label :end_date %>:
+  <%= f.date_select :end_date %><br>
+
+  <%= f.label :room %>:
+  <%= f.select :room_id, Room.all.map { |r| [r.name, r.id] } + [['Other', 'other']] %><br>
+
+  <div id="other-room" style="display: none;">
+    <%= f.label :other_room_name, "Specify Room" %>
+    <%= f.text_field :other_room_name %>
+  </div>
+
+  <%= f.label :description, "Description" %><br>
+  <%= f.text_area :description, rows: 5 %><br><br>
+
+  <%= f.submit "Update Booking" %>
+  <%= button_to 'Delete', stay_path(@stay), method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const roomSelect = document.querySelector("[name='stay[room_id]']");
+    const otherRoomDiv = document.getElementById("other-room");
+
+    roomSelect.addEventListener("change", function() {
+      if (this.value === "other") {
+        otherRoomDiv.style.display = "block";
+      } else {
+        otherRoomDiv.style.display = "none";
+      }
+    });
+  });
+</script>

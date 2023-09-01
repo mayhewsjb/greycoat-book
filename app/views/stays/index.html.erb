@@ -1,0 +1,26 @@
+<h2>All Stays</h2>
+
+<%= link_to 'New Stay', new_stay_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Room</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stays.each do |stay| %>
+      <tr>
+        <td><%= stay.user.first_name %> <%= stay.user.last_name %></td>
+        <td><%= stay.start_date %></td>
+        <td><%= stay.end_date %></td>
+        <td><%= stay.room.name %></td>
+        <td><%= link_to 'View Details', stay_path(stay) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

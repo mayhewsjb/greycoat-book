@@ -1,0 +1,31 @@
+<h2>Stay Details</h2>
+
+<p>
+  <strong>Start Date:</strong>
+  <%= @stay.start_date %>
+</p>
+
+<p>
+  <strong>End Date:</strong>
+  <%= @stay.end_date %>
+</p>
+
+<p>
+  <strong>Room:</strong>
+  <% if @stay.room_id %>
+    <%= @stay.room.name %>
+  <% else %>
+    <%= @stay.other_room_name %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @stay.description %>
+</p>
+
+<%= button_to 'Edit', edit_stay_path(@stay) %>
+
+<%= button_to 'Delete', stay_path(@stay), method: :delete, data: { confirm: 'Are you sure?' } %>
+
+<%= button_to 'Back to Stays List', stays_path %>
