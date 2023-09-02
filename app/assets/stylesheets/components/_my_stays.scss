@@ -1,0 +1,8 @@
+.custom-container {
+  border-radius: 8px;  // Increase the border-radius for a more rounded look
+  overflow: hidden;    // Ensures that inner content respects the container's rounded edges
+}
+
+.custom-table {
+  margin-bottom: -1px;  // Add some margin to separate table content from the rounded edge of the div
+}

@@ -8,7 +8,7 @@ ruby "3.1.2"
 
 gem 'devise'
 
-gem 'bootstrap', '~> 5.3'
+gem 'bootstrap', '~> 5.1'
 
 # End of my added gems
 

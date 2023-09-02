@@ -1,0 +1,52 @@
+/* Mobile styles (default) */
+#nav-links {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 10px; /* Adjust as needed */
+  background-color: #f8f9fa; /* Match bg-light */
+  z-index: 1;
+  flex-direction: column; /* Stack the links */
+  border: 1px solid #e0e0e0; /* A light border for visibility */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px 15px; /* Padding around the entire dropdown */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds a slight shadow for depth */
+  z-index: 10000; /* This is a high value, adjust as necessary */
+
+}
+
+.navbar-toggler {
+  display: block;
+}
+
+.nav-item {
+  border-bottom: 1px solid #ddd; /* Optional: gives a line between each link in the dropdown */
+  margin: 5px 0; /* Spacing between items */
+}
+
+.nav-item:last-child {
+  border-bottom: none; /* Avoids a line after the last link */
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+  #nav-links {
+      display: flex;
+      position: static;
+      border: none;
+      flex-direction: row; /* Line the links up next to each other */
+      box-shadow: 0 0px 0px rgba(0, 0, 0, 0); /* Optional: adds a slight shadow for depth */
+      border-radius: 0px; /* Rounded corners */
+      padding: 0px 0px; /* Padding around the entire dropdown */
+
+  }
+
+  .navbar-toggler {
+      display: none;
+  }
+
+  .nav-item {
+      border-bottom: none;
+      margin: 0px 0;
+  }
+}

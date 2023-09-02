@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_01_215951) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_02_205321) do
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "color"
   end
 
   create_table "stays", force: :cascade do |t|
@@ -28,6 +29,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_01_215951) do
     t.text "description"
     t.index ["room_id"], name: "index_stays_on_room_id"
     t.index ["user_id"], name: "index_stays_on_user_id"
+  end
+
+  create_table "todos", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "priority", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.text "description"
+    t.boolean "status", default: false
+    t.datetime "completed_at"
+    t.index ["user_id"], name: "index_todos_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -46,4 +59,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_01_215951) do
 
   add_foreign_key "stays", "rooms"
   add_foreign_key "stays", "users"
+  add_foreign_key "todos", "users"
 end

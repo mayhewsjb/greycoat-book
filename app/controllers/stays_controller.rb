@@ -5,6 +5,10 @@ class StaysController < ApplicationController
     @stays = Stay.where('end_date > ?', DateTime.now)
   end
 
+  def my_stays
+    @stays = current_user.stays
+  end
+
   def new
     @stay = Stay.new
   end
@@ -43,6 +47,41 @@ class StaysController < ApplicationController
     @stay.destroy
     redirect_to stays_path, notice: 'Stay was successfully deleted.'
   end
+
+  def fetch_stays
+    @stays = Stay.all # or however you fetch your stays
+
+    # Convert stays to JSON format
+    @stays_json = @stays.map do |stay|
+      {
+        id: stay.id,
+        title: "#{stay.user.first_name} in #{stay.room.name} til #{stay.end_date.strftime('%-m/%-d/%y')}", # assuming each stay has a room with a name
+        start: stay.start_date.to_s, # assuming the column is named start_date
+        end: stay.end_date.to_s,     # and end_date
+        color: stay.room.color
+        # color: stay.room.color       # assuming each room has a color attribute
+      }
+    end
+
+    render json: @stays_json
+  end
+
+  def fetch_my_stays
+    @stays = current_user.stays
+
+    @stays_json = @stays.map do |stay|
+      {
+        id: stay.id,
+        title: "#{stay.user.first_name} in #{stay.room.name} til #{stay.end_date.strftime('%-m/%-d/%y')}",
+        start: stay.start_date.to_s,
+        end: stay.end_date.to_s,
+        color: stay.room.color
+      }
+    end
+
+    render json: @stays_json
+  end
+
 
   private
 

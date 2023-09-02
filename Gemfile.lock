@@ -243,7 +243,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
-  bootstrap (~> 5.3)
+  bootstrap (~> 5.1)
   capybara
   debug
   devise
