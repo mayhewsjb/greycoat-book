@@ -143,6 +143,7 @@ GEM
     nokogiri (1.15.4-arm64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pg (1.5.4)
     popper_js (2.11.8)
     public_suffix (5.0.3)
     puma (5.6.7)
@@ -249,6 +250,7 @@ DEPENDENCIES
   devise
   importmap-rails
   jbuilder
+  pg (~> 1.2)
   puma (~> 5.0)
   rails (~> 7.0.7, >= 7.0.7.2)
   sassc-rails

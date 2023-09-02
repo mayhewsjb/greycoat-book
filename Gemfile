@@ -10,6 +10,15 @@ gem 'devise'
 
 gem 'bootstrap', '~> 5.1'
 
+group :production do
+  gem 'pg', '~> 1.2'
+end
+
+group :development, :test do
+  gem 'sqlite3', '~> 1.4'
+end
+
+
 # End of my added gems
 
 
@@ -20,7 +29,7 @@ gem "rails", "~> 7.0.7", ">= 7.0.7.2"
 gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+# gem "sqlite3", "~> 1.4"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
