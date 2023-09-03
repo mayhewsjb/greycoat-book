@@ -4,10 +4,16 @@
     <%= link_to 'New Stay', new_stay_path, class: 'btn btn-primary' %>
   </div>
 
-
+  <div class="room-key mb-2">
+    <% @rooms.each do |room| %>
+      <span class="d-inline-block mr-3">
+        <span class="d-inline-block mb-1 ms-2" style="background-color: <%= room.color %>; width: 10px; height: 10px; border-radius: 50%; vertical-align: middle;"></span>
+        <%= room.name %>
+      </span>
+    <% end %>
+  </div>
 
   <div id='calendar' style='height: 80vh;'></div>
-
 </div>
 
 
