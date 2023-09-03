@@ -2,3 +2,29 @@
   height: 550px;
   width: 100%;
 }
+
+$rooms: (
+  "large-double": #4285F4,
+  "small-double": #FBBC05,
+  "single-room": #34A853,
+  "sitting-room": #EA4335,
+  "other": #66757F
+);
+
+.colour-key-rooms {
+
+    &.mb-1 {
+        &.ms-2 {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            vertical-align: middle;
+
+            @each $room, $color in $rooms {
+                &.room-#{$room} {
+                    background-color: $color;
+                }
+            }
+        }
+    }
+}
