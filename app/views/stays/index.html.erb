@@ -1,0 +1,38 @@
+<div class="container mt-3">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>All Stays</h2>
+    <%= link_to 'New Stay', new_stay_path, class: 'btn btn-primary' %>
+  </div>
+
+  <div class="room-key mb-2">
+    <% @rooms.each do |room| %>
+      <span class="d-inline-block mr-3">
+          <span class="d-inline-block colour-key-rooms mb-1 ms-2 room-<%= room.name.parameterize(separator: '-') %>"></span>
+          <%= room.name %>
+      </span>
+    <% end %>
+  </div>
+  <div id='calendar' style='height: 80vh;'></div>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'listYear',
+          events: '/fetch_stays',
+          eventColor: 'color',
+          eventClick: function(info) {
+              window.location.href = '/stays/' + info.event.id;
+          },
+          headerToolbar: {
+              left: 'prev,next',
+              // center: 'title',
+              right: 'dayGridMonth,listYear'
+          }
+      });
+
+      calendar.render();
+  });
+</script>

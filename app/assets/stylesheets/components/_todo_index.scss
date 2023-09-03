@@ -1,0 +1,16 @@
+.borderless td, .borderless th {
+  border: none !important;
+}
+
+.bordered-table {
+  border: 2px solid #8f8f8f; // Choose your preferred color here
+  border-radius: .25rem; // This will make the corners slightly rounded
+  // Remove any existing border on the table header and footer, if present
+  thead th, tfoot td {
+    border-top: none !important;
+  }
+}
+
+.time-stamp {
+  margin-right: -15px;
+}

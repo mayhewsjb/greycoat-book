@@ -1,0 +1,37 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="mb-4">Stay Details</h2>
+
+      <div class="list-group mb-4">
+        <div class="list-group-item">
+          <strong>Start Date:</strong> <%= @stay.start_date %>
+        </div>
+        <div class="list-group-item">
+          <strong>End Date:</strong> <%= @stay.end_date %>
+        </div>
+        <div class="list-group-item">
+          <strong>Person Staying:</strong> <%= @stay.user.first_name %> <%= @stay.user.last_name %>
+        </div>
+        <div class="list-group-item">
+          <strong>Room:</strong>
+          <% if @stay.room_id %>
+            <%= @stay.room.name %>
+          <% else %>
+            <%= @stay.other_room_name %>
+          <% end %>
+        </div>
+        <div class="list-group-item">
+          <strong>Description:</strong> <%= @stay.description %>
+        </div>
+      </div>
+      <% if @stay.user == current_user %>
+        <%= link_to 'Edit', edit_stay_path(@stay), class: 'btn btn-primary mr-2' %>
+        <%= button_to 'Delete', stay_path(@stay), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger mr-2', form: { class: 'd-inline' } %>
+      <% end %>
+
+      <%= link_to 'Back to Stays List', stays_path, class: 'btn btn-secondary' %>
+
+    </div>
+  </div>
+</div>
