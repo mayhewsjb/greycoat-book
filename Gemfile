@@ -18,6 +18,7 @@ group :development, :test do
   gem 'sqlite3', '~> 1.4'
 end
 
+gem 'rails_real_favicon'
 
 # End of my added gems
 

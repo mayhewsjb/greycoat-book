@@ -37,9 +37,11 @@ class StaysController < ApplicationController
     if @stay.update(stay_params)
       redirect_to stay_path(@stay), notice: 'Stay was successfully updated.'
     else
+      flash.now[:alert] = @stay.errors.full_messages.to_sentence
       render :edit
     end
   end
+
 
 
   def destroy
@@ -49,17 +51,15 @@ class StaysController < ApplicationController
   end
 
   def fetch_stays
-    @stays = Stay.all # or however you fetch your stays
+    @stays = Stay.all
 
-    # Convert stays to JSON format
     @stays_json = @stays.map do |stay|
       {
         id: stay.id,
-        title: "#{stay.user.first_name} in #{stay.room.name} til #{stay.end_date.strftime('%-m/%-d/%y')}", # assuming each stay has a room with a name
-        start: stay.start_date.to_s, # assuming the column is named start_date
-        end: stay.end_date.to_s,     # and end_date
+        title: "#{stay.user.first_name} in #{stay.room.name} til #{stay.end_date.strftime('%-d/%-m/%y')}",
+        start: stay.start_date.to_s,
+        end: (stay.end_date + 1.day).to_s,  # This line is changed
         color: stay.room.color
-        # color: stay.room.color       # assuming each room has a color attribute
       }
     end
 
@@ -72,15 +72,16 @@ class StaysController < ApplicationController
     @stays_json = @stays.map do |stay|
       {
         id: stay.id,
-        title: "#{stay.user.first_name} in #{stay.room.name} til #{stay.end_date.strftime('%-m/%-d/%y')}",
+        title: "#{stay.user.first_name} in #{stay.room.name} til #{stay.end_date.strftime('%-d/%-m/%y')}",
         start: stay.start_date.to_s,
-        end: stay.end_date.to_s,
+        end: (stay.end_date + 1.day).to_s,  # This line is changed
         color: stay.room.color
       }
     end
 
     render json: @stays_json
   end
+
 
 
   private
