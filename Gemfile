@@ -20,6 +20,8 @@ end
 
 gem 'rails_real_favicon'
 
+gem 'font-awesome-rails'
+
 # End of my added gems
 
 
