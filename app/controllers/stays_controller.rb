@@ -58,7 +58,8 @@ class StaysController < ApplicationController
         title: "#{stay.user.first_name} in #{stay.room.name} til #{stay.end_date.strftime('%-d/%-m/%y')}",
         start: stay.start_date.to_s,
         end: (stay.end_date + 1.day).to_s,  # This line is changed
-        color: stay.room.color
+        color: stay.room.color,
+        room_id: stay.room.id  # Add this line
       }
     end
 
@@ -74,7 +75,8 @@ class StaysController < ApplicationController
         title: "#{stay.user.first_name} in #{stay.room.name} til #{stay.end_date.strftime('%-d/%-m/%y')}",
         start: stay.start_date.to_s,
         end: (stay.end_date + 1.day).to_s,  # This line is changed
-        color: stay.room.color
+        color: stay.room.color,
+        room_id: stay.room.id  # Add this line
       }
     end
 

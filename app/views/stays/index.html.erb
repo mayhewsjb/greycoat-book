@@ -19,11 +19,27 @@
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
+    var roomColors = {
+        1: "#4285F4",
+        2: "#FBBC05",
+        3: "#34A853",
+        4: "#EA4335",
+        5: "#66757F"
+    };
+
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'listYear',
         events: '/fetch_stays',
+        eventColor: 'color',
         eventClick: function(info) {
             window.location.href = '/stays/' + info.event.id;
+        },
+        eventContent: function(arg) {
+            var color = roomColors[arg.event.extendedProps.room_id] || '#66757F'; // default to "other" color if not found
+            arg.backgroundColor = color;
+            return {
+                html: arg.event.title
+            };
         },
         headerToolbar: {
             left: 'prev,next',
