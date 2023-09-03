@@ -18,38 +18,21 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'listYear',
+          events: '/fetch_stays',
+          eventColor: 'color',
+          eventClick: function(info) {
+              window.location.href = '/stays/' + info.event.id;
+          },
+          headerToolbar: {
+              left: 'prev,next',
+              // center: 'title',
+              right: 'dayGridMonth,listYear'
+          }
+      });
 
-    var roomColors = {
-        "large-double": "#4285F4",
-        "small-double": "#FBBC05",
-        "single-room": "#34A853",
-        "sitting-room": "#EA4335",
-        "other": "#66757F"
-    };
-
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'listYear',
-        events: '/fetch_stays',
-        eventColor: 'color',
-        eventClick: function(info) {
-            window.location.href = '/stays/' + info.event.id;
-        },
-        eventContent: function(arg) {
-            var color = roomColors[arg.event.extendedProps.room] || '#66757F'; // default to "other" color if not found
-            arg.backgroundColor = color;
-            return {
-                html: arg.event.title
-            }
-        },
-        headerToolbar: {
-            left: 'prev,next',
-            // center: 'title',
-            right: 'dayGridMonth,listYear'
-        }
-    });
-
-    calendar.render();
-});
-
+      calendar.render();
+  });
 </script>
