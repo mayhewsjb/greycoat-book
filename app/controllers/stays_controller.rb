@@ -1,11 +1,10 @@
 class StaysController < ApplicationController
   before_action :authenticate_user!
 
-def index
-  @stays = Stay.where('end_date > ?', DateTime.now)
-  @rooms = Room.all
-end
-
+  def index
+    @stays = Stay.where('end_date > ?', DateTime.now)
+    @rooms = Room.all
+  end
 
   def my_stays
     @stays = current_user.stays
@@ -43,8 +42,6 @@ end
       render :edit
     end
   end
-
-
 
   def destroy
     @stay = Stay.find(params[:id])

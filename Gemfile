@@ -18,9 +18,12 @@ group :development, :test do
   gem 'sqlite3', '~> 1.4'
 end
 
+<<<<<<< HEAD
 gem 'rails_real_favicon'
 
 gem 'font-awesome-rails'
+=======
+>>>>>>> fa187880de8047543d05c8762413ee89c3750c14
 
 # End of my added gems
 
