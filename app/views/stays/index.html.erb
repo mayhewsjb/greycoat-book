@@ -20,11 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
     var roomColors = {
-        1: "#4285F4",
-        2: "#FBBC05",
-        3: "#34A853",
-        4: "#EA4335",
-        5: "#66757F"
+        "large-double": "#4285F4",
+        "small-double": "#FBBC05",
+        "single-room": "#34A853",
+        "sitting-room": "#EA4335",
+        "other": "#66757F"
     };
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = '/stays/' + info.event.id;
         },
         eventContent: function(arg) {
-            var color = roomColors[arg.event.extendedProps.room_id] || '#66757F'; // default to "other" color if not found
+            var color = roomColors[arg.event.extendedProps.room] || '#66757F'; // default to "other" color if not found
             arg.backgroundColor = color;
             return {
                 html: arg.event.title
