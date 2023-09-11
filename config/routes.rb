@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'pages/info'
   devise_for :users
   resources :stays, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
     get 'my_stays', on: :collection
@@ -12,4 +13,5 @@ Rails.application.routes.draw do
       patch :toggle_status
     end
   end
+  get 'info', to: 'pages#info'
   end
