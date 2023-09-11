@@ -4,14 +4,6 @@
     <%= link_to 'New Stay', new_stay_path, class: 'btn btn-primary' %>
   </div>
 
-  <div class="room-key mb-2">
-    <% @rooms.each do |room| %>
-      <span class="d-inline-block mr-3">
-          <span class="d-inline-block colour-key-rooms mb-1 ms-2 room-<%= room.name.parameterize(separator: '-') %>"></span>
-          <%= room.name %>
-      </span>
-    <% end %>
-  </div>
   <div id='calendar' style='height: 80vh;'></div>
 </div>
 
