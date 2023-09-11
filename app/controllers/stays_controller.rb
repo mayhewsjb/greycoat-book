@@ -50,16 +50,16 @@ class StaysController < ApplicationController
   end
 
   def fetch_stays
-    @stays = Stay.all
+    @stays = Stay.where('end_date >= ?', Date.today)  # This filters out past events
 
     @stays_json = @stays.map do |stay|
       {
         id: stay.id,
         title: "#{stay.user.first_name} in #{stay.room.name} til #{stay.end_date.strftime('%-d/%-m/%y')}",
         start: stay.start_date.to_s,
-        end: (stay.end_date + 1.day).to_s,  # This line is changed
+        end: (stay.end_date + 1.day).to_s,
         color: stay.room.color,
-        room_id: stay.room.id  # Add this line
+        room_id: stay.room.id
       }
     end
 
@@ -67,23 +67,21 @@ class StaysController < ApplicationController
   end
 
   def fetch_my_stays
-    @stays = current_user.stays
+    @stays = current_user.stays.where('end_date >= ?', Date.today)  # Filtering out past stays
 
     @stays_json = @stays.map do |stay|
       {
         id: stay.id,
         title: "#{stay.user.first_name} in #{stay.room.name} til #{stay.end_date.strftime('%-d/%-m/%y')}",
         start: stay.start_date.to_s,
-        end: (stay.end_date + 1.day).to_s,  # This line is changed
+        end: (stay.end_date + 1.day).to_s,
         color: stay.room.color,
-        room_id: stay.room.id  # Add this line
+        room_id: stay.room.id
       }
     end
 
     render json: @stays_json
   end
-
-
 
   private
 
