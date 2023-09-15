@@ -6,7 +6,7 @@
       <% if @overlapping_stays.any? %>
         <div class="mb-4 alert alert-warning">
           <h4 class="alert-heading">Overlapping Stays</h4>
-          <p>The following rooms have overlapping people for the selected dates:</p>
+          <p>The following rooms have overlapping stays for the selected dates:</p>
           <ul class="list-group">
             <% @overlapping_stays.each do |stay| %>
               <li class="list-group-item">
@@ -29,7 +29,7 @@
 
         <div class="form-group">
           <%= f.label :room, class: 'form-label' %>
-          <%= f.select :room_id, @available_rooms.map { |r| [r.name, r.id] }, {}, class: 'form-control' %>
+          <%= f.select :room_id, Room.all.map { |r| [r.name, r.id] }, {}, class: 'form-control' %>
         </div>
 
         <div class="form-group">
