@@ -6,7 +6,7 @@
       <% if @overlapping_stays.any? %>
         <div class="mb-4 alert alert-warning">
           <h4 class="alert-heading">Overlapping Stays</h4>
-          <p>The following rooms have overlapping stays for the selected dates:</p>
+          <p>There are a bookings already for that time in the flat. Here's a list to make sure rooms don't overlap:</p>
           <ul class="list-group">
             <% @overlapping_stays.each do |stay| %>
               <li class="list-group-item">

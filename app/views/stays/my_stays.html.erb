@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         events: '/fetch_my_stays',
         eventColor: 'color',
         displayEventTime: false,  // This line hides the event time
+        firstDay: 1,
         eventClick: function(info) {
             window.location.href = '/stays/' + info.event.id;
         },
