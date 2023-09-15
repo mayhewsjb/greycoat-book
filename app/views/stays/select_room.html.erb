@@ -1,0 +1,48 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+
+      <%# Display the overlapping stays at the top %>
+      <% if @overlapping_stays.any? %>
+        <div class="mb-4 alert alert-warning">
+          <h4 class="alert-heading">Overlapping Stays</h4>
+          <p>The following rooms have overlapping people for the selected dates:</p>
+          <ul class="list-group">
+            <% @overlapping_stays.each do |stay| %>
+              <li class="list-group-item">
+                <strong>Details:</strong> <%= stay.user.first_name %> in <%= stay.room.name %>
+                <div>
+                  <strong>Start Date:</strong> <%= stay.start_date.strftime('%A %d/%m/%y') %>
+                  <strong>End Date:</strong> <%= stay.end_date.strftime('%A %d/%m/%y') %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <h2 class="mb-4">Select a Room</h2>
+
+      <%= form_for @stay, html: { class: 'needs-validation', novalidate: '' } do |f| %>
+        <%= f.hidden_field :start_date, value: params[:start_date] %>
+        <%= f.hidden_field :end_date, value: params[:end_date] %>
+
+        <div class="form-group">
+          <%= f.label :room, class: 'form-label' %>
+          <%= f.select :room_id, @available_rooms.map { |r| [r.name, r.id] }, {}, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :description, "Description:", class: 'form-label' %>
+          <%= f.text_area :description, rows: 5, class: 'form-control' %>
+        </div>
+
+        <div class="form-group mt-4 d-flex justify-content-begin">
+          <%= f.submit "Book", class: 'btn btn-primary me-2' %>
+          <%= link_to 'Cancel', :back, class: 'btn btn-secondary' %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

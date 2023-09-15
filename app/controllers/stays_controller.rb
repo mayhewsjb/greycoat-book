@@ -83,6 +83,27 @@ class StaysController < ApplicationController
     render json: @stays_json
   end
 
+  def available_rooms
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+
+    # Find overlapping stays
+    overlapping_stays = Stay.where("start_date <= ? AND end_date >= ?", end_date, start_date)
+
+    # Find rooms which are booked in overlapping stays
+    booked_rooms = overlapping_stays.map(&:room)
+
+    # All rooms - Booked rooms gives available rooms
+    @available_rooms = Room.all - booked_rooms
+
+    @overlapping_stays = overlapping_stays
+
+    # Instantiate @stay for the form
+    @stay = Stay.new(start_date: start_date, end_date: end_date)
+
+    render :select_room
+  end
+
   private
 
   def stay_params
