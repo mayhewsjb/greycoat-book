@@ -19,10 +19,13 @@ document.addEventListener('DOMContentLoaded', function() {
         "other": "#66757F"
     };
 
+    var currentDate = new Date();
+
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'listYear',
         events: '/fetch_stays',
         eventColor: 'color',
+        displayEventTime: false,  // This line hides the event time
         eventClick: function(info) {
             window.location.href = '/stays/' + info.event.id;
         },
@@ -32,6 +35,12 @@ document.addEventListener('DOMContentLoaded', function() {
             return {
                 html: arg.event.title
             };
+        },
+        eventDataTransform: function(eventData) {
+            if (new Date(eventData.start) < currentDate) {
+                eventData.start = currentDate;
+            }
+            return eventData;
         },
         headerToolbar: {
             left: 'prev,next',
