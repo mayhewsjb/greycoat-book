@@ -23,11 +23,14 @@
               <li class="nav-item me-4">
                   <a class="nav-link" href="/info">Helpful Info</a>
               </li>
+              <li class="nav-item me-4">
+                  <a class="nav-link" href="/users/forgotten_password">Reset Passwords</a>
+              </li>
               <!-- Add other links as you need -->
 
               <!-- Logout Link -->
               <li class="nav-item me-4">
-                  <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+                  <%= button_to "#{current_user.first_name} - Logout", destroy_user_session_path, method: :delete, class: 'nav-link' %>
               </li>
           </ul>
       </div>

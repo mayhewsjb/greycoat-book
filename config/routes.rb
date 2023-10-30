@@ -19,4 +19,11 @@ Rails.application.routes.draw do
   end
 
   get 'info', to: 'pages#info'
+
+  resources :users do
+    collection do
+      get 'forgotten_password'
+      post 'forgotten_password'
+    end
+  end
 end
